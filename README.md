@@ -12,7 +12,7 @@ Site beta independente para conectar um computador e um celular Android em uma s
 
 ## Limite de controle no Windows
 
-Uma página web não pode injetar comandos em qualquer jogo instalado no Windows. Nesta beta, os comandos chegam à página do anfitrião; para aplicá-los globalmente a jogos de PC, é necessário um auxiliar SmartToScreen para Windows, ainda não incluído. Alguns jogos e sistemas anticheat também podem bloquear entrada virtual.
+Uma página web não pode injetar comandos em qualquer jogo instalado no Windows. Nesta beta, os comandos chegam e são exibidos na página do anfitrião, mas ainda não são aplicados aos jogos. É necessário um auxiliar SmartToScreen para Windows, ainda não incluído. Alguns jogos e sistemas anticheat também podem bloquear entrada virtual.
 
 ## Hospedagem
 
@@ -23,3 +23,4 @@ Uma página web não pode injetar comandos em qualquer jogo instalado no Windows
 - `index.html` — interface do site.
 - `styles.css` — identidade visual e layout responsivo.
 - `app.js` — salas, autenticação da senha, vídeo e controles P2P.
+
