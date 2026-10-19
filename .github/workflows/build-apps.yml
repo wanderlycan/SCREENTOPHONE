@@ -3,6 +3,12 @@ name: Build SmartToScreen apps
 on:
   push:
     branches: [main]
+    paths:
+      - 'desktop-host/**'
+      - 'packaging/**'
+      - '.github/workflows/build-apps.yml'
+      - 'LICENSE'
+      - 'THIRD-PARTY-NOTICES.md'
   workflow_dispatch:
 
 permissions:
