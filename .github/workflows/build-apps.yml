@@ -82,7 +82,7 @@ jobs:
         run: sdkmanager "ndk;29.0.14206865"
 
       - name: Install Android 17 preview platform
-        run: sdkmanager --channel=3 "platforms;android-37"
+        run: sdkmanager --channel=3 "platforms;android-37.0" "build-tools;37.0.0"
 
       - name: Apply SmartToScreen app identity
         run: python packaging/android/rebrand-moonlight.py moonlight/app/build.gradle
