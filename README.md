@@ -8,6 +8,7 @@ SmartToScreen é um projeto novo, separado de `wanderlycan/screencasting`. Ele m
 - O APK Android usa o cliente Moonlight Android com a identidade SmartToScreen. Ele procura o PC na rede, mostra controles de toque e aceita controles compatíveis conectados ao telefone.
 - A transmissão usa o protocolo GameStream/Moonlight por conexão direta na rede local. Sunshine tenta usar o codificador de vídeo por hardware disponível na GPU; o Android usa o decodificador por hardware quando o aparelho oferece suporte.
 - No primeiro pareamento, o Android gera um PIN temporário e o mostra na tela. No PC, abra o painel pelo `SmartToScreen.exe` e informe esse PIN para aprovar o celular. Depois disso, o telefone permanece autorizado até ser removido no painel do Sunshine; a aprovação não é repetida a cada conexão.
+- Em uma sessão conectada em tela cheia, o Android mostra um pequeno botão `×` no canto superior direito. Toque e mantenha por 1 segundo para enviar `Alt+F4` ao PC. Um toque rápido não fecha nada; em modo de janela do DeX o botão fica oculto para não competir com os controles da janela.
 
 O PIN é gerado pelo app no telefone e serve para confirmar o primeiro pareamento. Esta versão usa pareamento aprovado no PC em vez de uma senha de sala escolhida pelo usuário. O pareamento fica lembrado no PC e no celular; remova o dispositivo pareado para revogar o acesso.
 
@@ -28,6 +29,7 @@ Os instaladores do Windows e Android são publicados juntos na página [Releases
 2. Conecte o telefone ao mesmo Wi-Fi do PC.
 3. Toque no PC descoberto e escolha **Parear**.
 4. Digite no painel do PC o PIN temporário exibido no telefone. Depois, escolha a tela ou jogo no app para iniciar.
+5. Para fechar a janela ativa no PC sem usar o atalho do DeX, mantenha pressionado por 1 segundo o botão `×` no canto superior direito durante a transmissão em tela cheia.
 
 O APK de beta é compilado com assinatura de depuração e pacote separado (`app.smarttoscreen.client.debug`) para não substituir o Moonlight oficial. Como a chave de beta é temporária, remova a versão anterior do SmartToScreen antes de instalar um APK gerado por uma nova compilação.
 
