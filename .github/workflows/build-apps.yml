@@ -79,7 +79,10 @@ jobs:
         uses: android-actions/setup-android@v4
 
       - name: Install Android NDK
-        run: sdkmanager "platforms;android-37" "ndk;29.0.14206865"
+        run: sdkmanager "ndk;29.0.14206865"
+
+      - name: Install Android 17 preview platform
+        run: sdkmanager --channel=3 "platforms;android-37"
 
       - name: Apply SmartToScreen app identity
         run: python packaging/android/rebrand-moonlight.py moonlight/app/build.gradle
