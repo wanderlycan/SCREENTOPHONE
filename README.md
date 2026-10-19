@@ -4,13 +4,47 @@ SmartToScreen é um projeto novo, separado de `wanderlycan/screencasting`, para 
 
 ## Como funciona
 
-- O instalador Windows cria o app `SmartToScreen.exe` e instala o Sunshine oficial como motor de captura, codificação de vídeo, descoberta local e envio dos comandos ao Windows.
+- O instalador Windows cria o app `SmartToScreen.exe` e instala o Sunshine oficial como motor de captura, codificação de vídeo, descoberta local e envio dos comandos ao Windows. O painel mostra os IPs da rede local e, quando instalado, o IP Tailscale deste PC.
 - O APK Android usa o cliente Moonlight Android com a identidade SmartToScreen. Ele procura o PC na rede, permite abrir o desktop inteiro e encaminha teclado, mouse, toque e controles compatíveis conectados ao telefone.
 - A transmissão usa o protocolo GameStream/Moonlight por conexão direta na rede local. Sunshine tenta usar o codificador de vídeo por hardware disponível na GPU; o Android usa o decodificador por hardware quando o aparelho oferece suporte. Os programas, inclusive CAD e ferramentas de programação, executam no PC; o telefone recebe imagem e envia comandos.
 - No primeiro pareamento, o Android gera um PIN temporário e o mostra na tela. No PC, abra o painel pelo `SmartToScreen.exe` e informe esse PIN para aprovar o celular. Depois disso, o telefone permanece autorizado até ser removido no painel do Sunshine; a aprovação não é repetida a cada conexão.
 - Em uma sessão conectada em tela cheia, o Android mostra um pequeno botão `×` no canto superior direito. Toque e mantenha por 1 segundo para enviar `Alt+F4` ao PC. Um toque rápido não fecha nada; em modo de janela do DeX o botão fica oculto para não competir com os controles da janela.
 
 O PIN é gerado pelo app no telefone e serve para confirmar o primeiro pareamento. Esta versão usa pareamento aprovado no PC em vez de uma senha de sala escolhida pelo usuário. O pareamento fica lembrado no PC e no celular; remova o dispositivo pareado para revogar o acesso.
+
+## Monitor virtual e acesso remoto
+
+O modo atual transmite uma tela selecionada pelo Sunshine. Para usar o Android como **monitor estendido em retrato**, instale um driver de monitor virtual compatível com Windows 11, como o [Virtual Display Driver comunitário](https://github.com/VirtualDrivers/Virtual-Display-Driver). O projeto SmartToScreen ainda não inclui nem instala esse driver automaticamente: drivers de vídeo precisam de privilégios de administrador, assinatura confiável e validação cuidadosa em cada configuração de GPU/Windows.
+
+Fluxo experimental para uma segunda tela:
+
+1. Instale o driver de monitor virtual a partir da página oficial do projeto e reinicie se o instalador solicitar.
+2. Abra **Configurações do Windows > Sistema > Tela**, localize a tela virtual e selecione **Estender estes vídeos**. Escolha orientação retrato e resolução adequada ao Android.
+3. No painel do Sunshine, selecione o monitor virtual como saída da transmissão. A seleção/configuração do Sunshine ainda é manual nesta beta.
+4. No Android, conecte-se ao PC pareado. O telefone exibirá o conteúdo da tela virtual; mova as janelas do Windows para esse monitor usando as configurações de exibição do próprio Windows.
+
+Isso faz o Windows tratar a tela virtual como monitor adicional. Não cria janelas Android independentes nem adapta automaticamente cada programa. Toque e teclado/mouse são encaminhados pela sessão remota e dependem do app, da versão do Sunshine e do método de entrada. Alguns aplicativos protegidos, telas seguras do Windows, conteúdo DRM, drivers de GPU, HDR, caneta e periféricos CAD podem não funcionar como em uma tela física.
+
+### Conectar quando o Android está fora da rede de casa
+
+O caminho recomendado para a beta é uma rede privada Tailscale, sem abrir portas públicas no roteador:
+
+1. Instale [Tailscale para Windows](https://tailscale.com/download/windows) no PC e o app Tailscale no Android.
+2. Entre na mesma conta nos dois aparelhos e aprove o PC na rede privada.
+3. No painel SmartToScreen, copie o **IP Tailscale** mostrado. No Moonlight/SmartToScreen Android, use **Adicionar PC manualmente** e informe esse IP.
+4. Faça o pareamento inicial com o PIN e aprove-o no painel do Sunshine no PC.
+
+O Tailscale precisa permanecer instalado, conectado e autorizado nos dois aparelhos; exige conta e conexão com o serviço de coordenação. Normalmente tenta criar um caminho direto entre os aparelhos. Em redes que impedem conexão direta, pode recorrer a relay; relays podem aumentar bastante a latência e não são adequados para transmitir vídeo continuamente. CGNAT, firewall corporativo, Wi‑Fi público e operadora móvel podem impedir a conexão. O SmartToScreen não fornece ainda um servidor próprio de sinalização/relay nem descoberta global automática por nome.
+
+Também é possível expor Sunshine pela internet com encaminhamento de portas no roteador, mas isso requer configuração de rede e expõe portas do serviço; não é o fluxo recomendado para iniciantes. Não use senha fraca no painel do Sunshine e não compartilhe PINs ou credenciais.
+
+### Limites atuais desta beta
+
+- A tela virtual requer um driver de terceiros e instalação administrativa; o instalador SmartToScreen atual não o inclui.
+- A escolha do monitor e o modo **Estender** são configurados manualmente no Windows/Sunshine.
+- A conexão de outra rede usa Tailscale configurado pelo usuário ou encaminhamento de portas. Não há P2P próprio com relay SmartToScreen.
+- O painel exibe o IP Tailscale quando o cliente de linha de comando está instalado e conectado; essa informação não cria nem aprova a conexão sozinha.
+- A latência remota depende da rota, upload do PC, codificador, decodificador e qualidade do Wi‑Fi/4G/5G. Em geral, uma conexão local cabeada + Wi‑Fi 5/6 será mais responsiva.
 
 ## Experiência DeX e produtividade
 
@@ -66,6 +100,7 @@ O computador local não precisa ter Android Studio ou JDK; a compilação Androi
 O app Windows de abertura do painel é código SmartToScreen. A captura, codificação e controle de entrada são fornecidos pelo Sunshine. O APK Android é derivado do Moonlight Android. Consulte [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) e os avisos do upstream antes de redistribuir ou modificar os pacotes.
 
 O instalador não é assinado digitalmente nesta beta, então o Windows pode exibir o aviso de editor desconhecido. Distribua os arquivos somente pelos links oficiais deste repositório.
+
 
 
 
