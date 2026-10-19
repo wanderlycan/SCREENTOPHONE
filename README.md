@@ -1,16 +1,22 @@
 # SmartToScreen
 
-SmartToScreen é um projeto novo, separado de `wanderlycan/screencasting`. Ele monta um par de apps para jogar do PC Windows 11 pelo Android na mesma rede local.
+SmartToScreen é um projeto novo, separado de `wanderlycan/screencasting`, para usar o desktop e os programas do PC Windows 11 pelo Android na mesma rede local. O foco do projeto passa a ser produtividade no modo DeX; jogos continuam sendo um uso possível, mas secundário.
 
 ## Como funciona
 
 - O instalador Windows cria o app `SmartToScreen.exe` e instala o Sunshine oficial como motor de captura, codificação de vídeo, descoberta local e envio dos comandos ao Windows.
-- O APK Android usa o cliente Moonlight Android com a identidade SmartToScreen. Ele procura o PC na rede, mostra controles de toque e aceita controles compatíveis conectados ao telefone.
-- A transmissão usa o protocolo GameStream/Moonlight por conexão direta na rede local. Sunshine tenta usar o codificador de vídeo por hardware disponível na GPU; o Android usa o decodificador por hardware quando o aparelho oferece suporte.
+- O APK Android usa o cliente Moonlight Android com a identidade SmartToScreen. Ele procura o PC na rede, permite abrir o desktop inteiro e encaminha teclado, mouse, toque e controles compatíveis conectados ao telefone.
+- A transmissão usa o protocolo GameStream/Moonlight por conexão direta na rede local. Sunshine tenta usar o codificador de vídeo por hardware disponível na GPU; o Android usa o decodificador por hardware quando o aparelho oferece suporte. Os programas, inclusive CAD e ferramentas de programação, executam no PC; o telefone recebe imagem e envia comandos.
 - No primeiro pareamento, o Android gera um PIN temporário e o mostra na tela. No PC, abra o painel pelo `SmartToScreen.exe` e informe esse PIN para aprovar o celular. Depois disso, o telefone permanece autorizado até ser removido no painel do Sunshine; a aprovação não é repetida a cada conexão.
 - Em uma sessão conectada em tela cheia, o Android mostra um pequeno botão `×` no canto superior direito. Toque e mantenha por 1 segundo para enviar `Alt+F4` ao PC. Um toque rápido não fecha nada; em modo de janela do DeX o botão fica oculto para não competir com os controles da janela.
 
 O PIN é gerado pelo app no telefone e serve para confirmar o primeiro pareamento. Esta versão usa pareamento aprovado no PC em vez de uma senha de sala escolhida pelo usuário. O pareamento fica lembrado no PC e no celular; remova o dispositivo pareado para revogar o acesso.
+
+## Experiência DeX e produtividade
+
+O cliente atual permite transmitir o desktop inteiro, então você pode abrir os programas instalados no PC e controlá-los pelo Android. Teclado e mouse Bluetooth ou USB pareados com o telefone funcionam como entrada para a sessão; controles Bluetooth compatíveis também podem ser conectados ao Android. O mapeamento depende do acessório e do aparelho, e periféricos especializados de CAD ainda precisam de validação própria.
+
+A beta ainda não oferece uma interface DeX própria, autenticação por digital para destravar a conexão, nem um fluxo garantido de acesso à tela de login do Windows após iniciar sem monitor. Esses são os próximos itens para validar. Sunshine instala um serviço que pode iniciar com o Windows; o acesso à tela de bloqueio depende de configuração e modo de execução, então será tratado como opção avançada após testes em Windows 11 e GPUs diferentes.
 
 ## Downloads
 
@@ -60,6 +66,8 @@ O computador local não precisa ter Android Studio ou JDK; a compilação Androi
 O app Windows de abertura do painel é código SmartToScreen. A captura, codificação e controle de entrada são fornecidos pelo Sunshine. O APK Android é derivado do Moonlight Android. Consulte [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) e os avisos do upstream antes de redistribuir ou modificar os pacotes.
 
 O instalador não é assinado digitalmente nesta beta, então o Windows pode exibir o aviso de editor desconhecido. Distribua os arquivos somente pelos links oficiais deste repositório.
+
+
 
 
 
